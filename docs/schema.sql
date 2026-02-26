@@ -128,6 +128,25 @@ CREATE POLICY "Users can delete own exercises" ON exercise_sessions FOR DELETE U
 CREATE POLICY "Users can view own prescriptions" ON mood_prescriptions FOR SELECT USING (auth.uid() = user_id);
 CREATE POLICY "Users can view own correlations" ON user_correlations FOR SELECT USING (auth.uid() = user_id);
 
+-- OURA OAUTH TOKENS
+-- Migration: run this snippet in the Supabase SQL editor to add Oura token storage.
+-- The service_role backend client bypasses RLS; the policy below protects direct
+-- client access so each user can only read their own token row.
+CREATE TABLE oura_tokens (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  access_token TEXT NOT NULL,
+  refresh_token TEXT NOT NULL,
+  expires_at TIMESTAMPTZ NOT NULL,
+  scope TEXT DEFAULT '',
+  created_at TIMESTAMPTZ DEFAULT now(),
+  updated_at TIMESTAMPTZ DEFAULT now(),
+  UNIQUE(user_id)
+);
+ALTER TABLE oura_tokens ENABLE ROW LEVEL SECURITY;
+CREATE POLICY oura_tokens_owner ON oura_tokens
+  USING (user_id = auth.uid());
+
 -- INDEXES
 CREATE INDEX idx_mood_checkins_user_date ON mood_checkins(user_id, created_at DESC);
 CREATE INDEX idx_wearable_daily_user_date ON wearable_daily(user_id, date DESC);

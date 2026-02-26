@@ -1,7 +1,16 @@
 {
   "permissions": {
     "allow": [
-      "Bash(.venv/bin/python:*)"
+      "Bash(.venv/bin/python:*)",
+      "WebSearch",
+      "Bash(grep:*)",
+      "WebFetch(domain:cloud.ouraring.com)",
+      "WebFetch(domain:developer.ouraring.com)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:wearipedia.readthedocs.io)",
+      "Bash(pip install:*)",
+      "Bash(python:*)",
+      "Bash(.venv/bin/pip install:*)"
     ]
   }
 }
