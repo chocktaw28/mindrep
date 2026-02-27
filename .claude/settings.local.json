@@ -10,7 +10,8 @@
       "WebFetch(domain:wearipedia.readthedocs.io)",
       "Bash(pip install:*)",
       "Bash(python:*)",
-      "Bash(.venv/bin/pip install:*)"
+      "Bash(.venv/bin/pip install:*)",
+      "Bash(npx expo:*)"
     ]
   }
 }
