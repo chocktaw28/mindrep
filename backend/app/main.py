@@ -8,7 +8,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.config import get_settings
-from app.routers import exercise, insights, mood, prescriptions, wearable
+from app.routers import exercise, insights, mood, prescriptions, users, wearable
 
 settings = get_settings()
 
@@ -33,6 +33,7 @@ app.include_router(exercise.router)
 app.include_router(wearable.router)
 app.include_router(prescriptions.router)
 app.include_router(insights.router)
+app.include_router(users.router)
 
 
 @app.get("/api/v1/health")

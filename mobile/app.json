@@ -13,7 +13,11 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "infoPlist": {
+        "NSHealthShareUsageDescription": "MindRep reads your HRV, resting heart rate, sleep, workouts, steps, and active energy to correlate exercise with your wellbeing patterns.",
+        "NSHealthUpdateUsageDescription": "MindRep does not write health data."
+      }
     },
     "android": {
       "adaptiveIcon": {
@@ -30,7 +34,13 @@
       "favicon": "./assets/images/favicon.png"
     },
     "plugins": [
-      "expo-router"
+      "expo-router",
+      [
+        "react-native-health",
+        {
+          "isClinicalDataEnabled": false
+        }
+      ]
     ],
     "experiments": {
       "typedRoutes": true
